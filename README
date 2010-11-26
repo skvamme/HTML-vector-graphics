@@ -1,0 +1,13 @@
+This Erlang Program converts a DXF (binary or ASCII) to an HTML file. View it in an HTML5-ready browser (Safari, Cromium etc).
+
+The DXF file can be created in QCAD, AUTOCAD and other CAD systems.
+
+The parameters to dxf2js.sh is a dxffilename without extension and a layername
+
+The dxffile should be stored in a dir ../DXF
+
+The HTML file is created in ../DXF 
+
+ If you want the files elswhere - change the dxf2js.sh
+ 
+ You need to download Erlang to run this program.
