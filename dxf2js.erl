@@ -15,47 +15,52 @@
 %% ctx.shadowBlur = 2;
 %% ctx.shadowColor = "rgba(0,0,0,0.5)";
 %% Done:
-%% 080612	First version													S Kvamme
-%% 081213	Bug in setting of Color fixed								S Kvamme
-%% 081213	Bug in sorting fixed. Changed to sort Thicknes (was Elevation).	S Kvamme
-%% 090909	Added support for ASCII DXF								S Kvamme
-%% 100117	Bug in entity color fixed (QCAD)							S Kvamme
-%% 100619	Changed output format from erlang to Javascript		S Kvamme
-
+%% 080612    First version
+%% 081213    Bug in setting of Color fixed
+%% 081213    Bug in sorting fixed. Changed to sort Thicknes (was Elevation)
+%% 090909    Added support for ASCII DXF
+%% 100117    Bug in entity color fixed (QCAD)
+%% 100619    Changed output format from erlang ex11 to <canvas>
+%% 120125    Layers are specified on command line as name1,name2,name3 (a + delimiter is also ok)
+%% 120124    If layer name is svg the output will be svg else output is <canvas>
 
 %****************************************************************************
-% Read dxf file and otput corresponding javascript source for <CANVAS> graphics
+% Read dxf file and otput corresponding javascript source for <CANVAS> or SVG graphics
 %****************************************************************************
 start(Args) ->
-	DXF = hd(Args),
-	Mode = svg, % svg or canvas are supported
-	Layerarray = tl(Args),
-	Etable = ets:new(entity,[duplicate_bag,private]), % Store all the entities in this table
-	Ttable = ets:new(tmp,[set,private]), % Store temporary group values here
-	lists:foreach( fun(Layer) -> 
-		case read_dxf_tag(DXF) of
-			error -> io:format("//Cannot read file: ~p~n",[DXF]);
-			ascii ->
-				{ok, F} = file:open(DXF, read),
-				print_header(),
-				Mode:print_body(),
-				find_entities_ascii(F),
-				io:get_line(F, ''), % get rid of "  0"
-				entities_ascii(F,Etable,Layer,trim(io:get_line(F, '')));
-			bin -> 
-				{ok, B} = file:read_file(DXF),
-				{_,B1} = split_binary(B, 22),
-				B2 = find_header(B1),
-				print_header(),
-				Mode:print_body(),
-				limits(B2),
-				B3 = find_entities(B2),
-				entities(Etable,B3,Layer)
-		end,
-		prints_entities(Etable,Ttable,Mode),
-		Mode:print_endbody()
-	end,Layerarray),
-	print_trailer().
+    DXF = hd(Args),
+    Layerarray = string:tokens(lists:flatten(tl(Args)),",+"),
+    Etable = ets:new(entity,[duplicate_bag,private]), % Store all the entities in this table
+    Ttable = ets:new(tmp,[set,private]), % Store temporary group values here
+    lists:foreach( fun(Layer) -> 
+        case string:to_upper(Layer) of
+            "SVG" -> Mode = svg;
+            "EX" -> Mode = ex;
+            _ -> Mode = canvas
+        end,
+        case read_dxf_tag(DXF) of
+            error -> io:format("//Cannot read file: ~p~n",[DXF]);
+            ascii ->
+                {ok, F} = file:open(DXF, read),
+                print_header(),
+                Mode:print_body(),
+                find_entities_ascii(F),
+                io:get_line(F, ''), % get rid of "  0"
+                entities_ascii(F,Etable,string:to_upper(Layer),trim(io:get_line(F, '')));
+            bin ->
+                {ok, B} = file:read_file(DXF),
+                {_,B1} = split_binary(B, 22),
+                B2 = find_header(B1),
+                {X1,Y1,X2,Y2} = limits(B2),
+                print_header(),
+                Mode:print_body({X1,Y1,X2,Y2}),
+                B3 = find_entities(B2),
+                entities(Etable,B3,string:to_upper(Layer))
+        end,
+        prints_entities(Etable,Ttable,Mode),
+        Mode:print_endbody(),
+        print_trailer()
+    end,Layerarray). 
 
 
 %****************************************************************************************
@@ -65,6 +70,8 @@ print_header() ->
 	io:format("<html>~n",[]),
 	io:format("<head>~n",[]),
 	io:format("<meta name=creator, value=dxf2js>~n",[]),
+	io:format("<meta id=\"module\" name=\"canvas_svg\" content=\"canvas_svg_demo\" />",[]), % change module name to ...
+	io:format("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">",[]), % to let mobile devices scale to screen
 	io:format("<title>dxf2js</title>~n",[]),
 	io:format("</head>~n",[]),
 	io:format("<body>~n",[]).
@@ -191,15 +198,15 @@ find_header1({B,_,_}) -> find_header1(parse_dxf(B)).
 %****************************************************************************
 limits(B) -> limits1({B,"",0}).
 limits1({B,"$EXTMIN",9}) -> 
-	{B1,X1,_G1} = parse_dxf(B), 
-	{B2,Y1,_G2} = parse_dxf(B1),
-    io:format("var bbox = [~B,~B,",[round(X1),round(Y1)]),
+	{B1,_X1,_G1} = parse_dxf(B), 
+	{B2,_Y1,_G2} = parse_dxf(B1),
+%    io:format("var bbox = [~B,~B,",[round(X1),round(Y1)]),
 	limits1({B2,"",0});
 limits1({B,"$EXTMAX",9}) -> 
 	{B1,X2,_G1} = parse_dxf(B), 
 	{_B2,Y2,_G2} = parse_dxf(B1),
-	io:format("~B,~B];~n",[round(X2),round(Y2)]),
-	io:format("//EndSetup~n",[]);
+%	io:format("~B,~B];~n",[round(X2),round(Y2)]),
+	{0,0,X2,Y2}; 
 limits1({B,_,_}) -> limits1(parse_dxf(B)).
 
 

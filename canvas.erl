@@ -13,10 +13,8 @@
 %****************************************************************************
 % Print the header section in the html file
 %****************************************************************************
-print_body() ->
-	Width = 220.0,
-	Height = 146.0,
-	io:format("<canvas id=dxf height=\"~.3f\" width=\"~.3f\">~n",[Height,Width]),
+print_body({X1,Y1,X2,Y2}) ->
+	io:format("<canvas id=dxf height=\"~.3f\" width=\"~.3f\" style=\"position:absolute; left:0; top:0; z-index:0;\">~n",[Y2-Y1,X2-X1]),
 	io:format("<style type='text/css'> canvas { border: solid 1px red; } </style>~n",[]),
 	io:format("<script type='text/javascript'>~n",[]),
 	io:format("colors = new Array(257);~n",[]),
@@ -27,7 +25,7 @@ print_body() ->
 	io:format("var ctx = canvas.getContext('2d');~n",[]),
 	io:format("canvas.setAttribute('miterLimit','2.0');~n",[]),
 	io:format("ctx.scale(1,-1);~n",[]),
-	io:format("ctx.translate(0,\"-~.3f\");~n",[Height]),
+	io:format("ctx.translate(0,\"-~.3f\");~n",[Y2-Y1]),
 	io:format("ctx.lineWidth=1;~n",[]).
 
 

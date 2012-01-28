@@ -12,11 +12,11 @@
 %****************************************************************************
 % Print the header section in the html file
 %****************************************************************************
-print_body() ->
-	io:format("<svg  id=\"svg2\" viewBox=\"0 0 220 146\" shape-rendering=\"auto\" xmlns=\"http://www.w3.org/2000/svg\">~n",[]),
-	
-	io:format("<!-- Created with dxf2js -->~n",[]),
-	io:format("<g  transform=\"scale(1 -1) translate(0,-146)\">~n",[]),
+print_body({X1,Y1,X2,Y2}) ->
+%	io:format("<svg  id=\"svg\" viewBox=\"0 0 220 146\" shape-rendering=\"auto\" xmlns=\"http://www.w3.org/2000/svg\">~n",[]),
+	io:format("<svg  id=\"svg\" width=\"~.3f\" height=\"~.3f\" shape-rendering=\"auto\" xmlns=\"http://www.w3.org/2000/svg\"~n",[X2-X1,Y2-Y1]),
+	io:format("style=\"position:absolute; top:0; left:0; z-index:1\">~n",[]),
+	io:format("<g  transform=\"scale(1 -1) translate(0,-~.3f)\">~n",[Y2-Y1]),
 	io:format("<title>Layer 1</title>~n",[]).
 
 
@@ -110,7 +110,7 @@ doLWPoly(Pen,Closed,FirstVertex,G42list,G10list,G20list) ->
 	[{10,X1}|G10tail] = G10list,
 	[{20,Y1}|G20tail] = G20list,
 	case FirstVertex of
-		1 -> 	io:format("<path d=\"M ~.3f ~.3f~n",[X1,Y1]),
+		1 -> 	io:format("<path d=\"M ~.3f ~.3f ",[X1,Y1]),
 				doLWPoly(Pen,Closed,0,G42list,G10list,G20list);
 		_ ->  drawSegment(G10list,G20list,G42list),
 				doLWPoly(Pen,Closed,0,G42tail,G10tail,G20tail)
@@ -133,7 +133,7 @@ drawSegment([{10,X1}|[{10,X2}|_]],[{20,Y1}|[{20,Y2}|_]],[{42,B1}|_]) when
 						end,
 	io:format("L ~.3f ~.3f A ~.3f ~.3f 0 0 ~B ~.3f ~.3f~n",[X1,Y1,Rad,Rad,Clockwise,X2,Y2]);
 drawSegment([{10,X1}|_],[{20,Y1}|_],_) -> 
-	io:format("L ~.3f ~.3f~n",[X1,Y1]).
+	io:format("L ~.3f ~.3f ",[X1,Y1]).
 
 %****************************************************************************************
 % Function drawSegment(B2,X1,Y1,X2,Y2)
