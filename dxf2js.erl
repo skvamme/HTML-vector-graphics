@@ -35,7 +35,6 @@ start(Args) ->
     lists:foreach( fun(Layer) -> 
         case string:to_upper(Layer) of
             "SVG" -> Mode = svg;
-            "EX" -> Mode = ex;
             _ -> Mode = canvas
         end,
         case read_dxf_tag(DXF) of

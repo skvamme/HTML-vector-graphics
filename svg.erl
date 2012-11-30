@@ -31,6 +31,11 @@ print_endbody() ->
 %****************************************************************************************
 % Function print_entity({_,Entity name,Entity},_) 
 %****************************************************************************************
+print_entity({_,"POINT",Entity},_) ->
+[{_,X1}|_] = lookup(Entity, 10),
+[{_,Y1}|_] = lookup(Entity, 20),
+io:format("~.3f, ~.3f~n",[X1,Y1]);
+
 print_entity({_,"LINE",Entity},_) ->
 	[{_,X1}|_] = lookup(Entity, 10),
 	[{_,Y1}|_] = lookup(Entity, 20),
@@ -55,7 +60,7 @@ print_entity({_,"CIRCLE",Entity},_) ->
    [{_,Y1}|_] = lookup(Entity, 20),
 	[{_,Radius}|_] = lookup(Entity, 40),
    [{_,Pen}|_] = reverse(lookup(Entity, 62)),
-	io:format("<circle cx=\"~.3f\" cy=\"~.3f\" r=\"~.3f\" stroke-width=\"1\" stroke=\"rgb(~B,~B,~B)\" />~n",[X1,Y1,Radius,Pen,Pen,Pen]);
+	io:format("<circle cx=\"~.3f\" cy=\"~.3f\" r=\"~.3f\" stroke-width=\"1\" fill='none' stroke=\"rgb(~B,~B,~B)\" />~n",[X1,Y1,Radius,Pen,Pen,Pen]);
 
 print_entity({_,"LWPOLYLINE",Entity},_) ->
 	[{_,Pen}|_] = reverse(lookup(Entity, 62)), 

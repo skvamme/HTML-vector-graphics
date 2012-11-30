@@ -20,7 +20,7 @@ print_body({X1,Y1,X2,Y2}) ->
 	io:format("colors = new Array(257);~n",[]),
 	io:format("for(var i=0;i<257;i++) {~n",[]),
 	io:format("	colors[i]='rgb('+i+','+i+','+i+')';~n",[]),
-	io:format("}; colors[1] = 'red';~n",[]),
+	io:format("}; colors[1] = 'red'; colors[3] = 'green';~n",[]),
 	io:format("var canvas = document.getElementById('dxf');~n",[]),
 	io:format("var ctx = canvas.getContext('2d');~n",[]),
 	io:format("canvas.setAttribute('miterLimit','2.0');~n",[]),
