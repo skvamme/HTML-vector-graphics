@@ -2,7 +2,9 @@ This Erlang Program converts a DXF (binary or ASCII) to an HTML file. View it in
 
 The DXF file can be created in QCAD, AUTOCAD and other CAD systems. Note that a closed pline will be filled in the HTML file. Entities with higher elevation will be on top in the HTML file.
 
-The parameters to dxf2js.sh is a dxffilename without extension and a layername
+The parameters to dxf2js.sh is a dxffilename without extension, and a layername
+
+If the layer name is svg the output format will be svg, all other layers will be in canvas format. This makes it easy to create a combined svg/canvas graphics.
 
 The dxffile should be stored in a dir ../DXF
 
@@ -11,3 +13,5 @@ The HTML file is created in ../DXF
  If you want the files elswhere - change the dxf2js.sh
  
  You need to download Erlang http://www.erlang.org to run this program.
+ 
+ 
