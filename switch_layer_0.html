@@ -1,0 +1,95 @@
+<html>
+<head>
+<meta name=creator, value=dxf2js>
+<meta id="module" name="canvas_svg" content="canvas_svg_demo" /><meta name="viewport" content="width=device-width, initial-scale=1"><title>dxf2js</title>
+</head>
+<body>
+<canvas id=dxf height="432.474" width="434.048" style="position:absolute; left:0; top:0; z-index:0;">
+<style type='text/css'> canvas { border: solid 1px red; } </style>
+<script type='text/javascript'>
+colors = new Array(257);
+for(var i=0;i<257;i++) {
+	colors[i]='rgb('+i+','+i+','+i+')';
+}; colors[1] = 'red'; colors[3] = 'green';
+var canvas = document.getElementById('dxf');
+var ctx = canvas.getContext('2d');
+canvas.setAttribute('miterLimit','2.0');
+ctx.scale(1,-1);
+ctx.translate(0,"-432.474");
+ctx.lineWidth=1;
+ctx.fillStyle = colors[200];
+ctx.strokeStyle = colors[200];
+ctx.beginPath(); 
+ctx.lineTo(19.078,0.000);
+ctx.arc(400.629,19.078,19.078,4.712,0.000,false);
+ctx.lineTo(419.706,19.078);
+ctx.arc(400.629,399.076,19.078,6.283,1.571,false);
+ctx.lineTo(400.629,418.153);
+ctx.arc(19.078,399.076,19.078,1.571,3.142,false);
+ctx.lineTo(0.000,399.076);
+ctx.arc(19.078,19.078,19.078,3.142,4.712,false);
+ctx.lineTo(19.078,0.000);
+ctx.fill();
+ctx.fillStyle = colors[240];
+ctx.strokeStyle = colors[240];
+ctx.beginPath(); 
+ctx.arc(18.253,18.253,11.447,3.142,4.712,false);
+ctx.lineTo(18.253,6.807);
+ctx.arc(401.453,18.253,11.447,4.712,0.000,false);
+ctx.lineTo(412.899,18.253);
+ctx.arc(401.453,399.900,11.447,6.283,1.571,false);
+ctx.arc(400.637,402.303,9.080,1.481,6.062,true);
+ctx.lineTo(409.496,400.312);
+ctx.arc(401.865,17.841,7.631,0.000,4.712,true);
+ctx.lineTo(401.865,10.210);
+ctx.arc(17.435,21.244,11.041,4.749,3.416,true);
+ctx.lineTo(6.807,18.253);
+ctx.fill();
+ctx.fillStyle = colors[160];
+ctx.strokeStyle = colors[160];
+ctx.beginPath(); 
+ctx.arc(16.169,19.504,16.175,3.168,4.808,false);
+ctx.lineTo(17.712,3.403);
+ctx.arc(401.995,17.712,14.308,4.712,0.000,false);
+ctx.lineTo(416.303,17.712);
+ctx.arc(399.994,401.800,16.365,6.200,1.532,false);
+ctx.arc(400.629,399.076,19.078,1.571,6.283,true);
+ctx.lineTo(419.706,399.076);
+ctx.arc(400.629,19.078,19.078,0.000,4.712,true);
+ctx.lineTo(400.629,0.000);
+ctx.arc(19.078,19.078,19.078,4.712,3.142,true);
+ctx.lineTo(0.000,19.078);
+ctx.fill();
+ctx.fillStyle = colors[240];
+ctx.strokeStyle = colors[240];
+ctx.beginPath(); 
+ctx.lineTo(401.995,414.750);
+ctx.arc(17.712,400.442,14.308,1.571,3.142,false);
+ctx.lineTo(3.403,400.442);
+ctx.arc(17.712,17.712,14.308,3.142,4.712,false);
+ctx.arc(16.169,19.504,16.175,4.808,3.168,true);
+ctx.lineTo(0.000,19.078);
+ctx.arc(19.078,399.076,19.078,3.142,1.571,true);
+ctx.lineTo(19.078,418.153);
+ctx.arc(399.994,401.800,16.365,1.532,6.200,true);
+ctx.arc(401.995,400.442,14.308,6.283,1.571,false);
+ctx.lineTo(401.995,414.750);
+ctx.fill();
+ctx.fillStyle = colors[160];
+ctx.strokeStyle = colors[160];
+ctx.beginPath(); 
+ctx.arc(400.637,402.303,9.080,6.062,1.481,false);
+ctx.lineTo(401.453,411.347);
+ctx.arc(18.253,399.900,11.447,1.571,3.142,false);
+ctx.lineTo(6.807,399.900);
+ctx.arc(17.435,21.244,11.041,3.416,4.749,false);
+ctx.arc(17.841,17.841,7.631,4.712,3.142,true);
+ctx.lineTo(10.210,17.841);
+ctx.arc(17.841,400.312,7.631,3.142,1.571,true);
+ctx.lineTo(17.841,407.943);
+ctx.arc(401.865,400.312,7.631,1.571,6.283,true);
+ctx.lineTo(409.496,400.312);
+ctx.fill();
+</script>
+</body>
+</html>

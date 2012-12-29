@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="ISO-8859-1"/>
+<meta id="module" name="switch" content="widget" />
+<!--meta name="viewport" content="width=device-width; initial-scale=1.0" /-->
+<script type='text/javascript'>
+var toggle = 90;
+var ws;
+
+function powerswitch(){
+	ws.send('{\"type\" : \"switch\",\"pid\" : \"local_gui\",\"values\" : [\"toggle\"]}');
+	var el = document.getElementById( 'svg_g' );
+	el.transform.baseVal.getItem( 0 ).setRotate( toggle, 209.853,209.077 );  
+	if (toggle == 0)
+	  toggle = 90;
+	else
+	  toggle = 0;
+}
+
+function ready(){
+	if ('MozWebSocket' in window) {
+		WebSocket = MozWebSocket;
+	}
+	if ('WebSocket' in window) {
+		ws = new WebSocket('ws://217.212.3.12:81');
+		ws.onopen = function() {
+			var erlang = document.getElementById('module').name
+			ws.send('{\"pid\" : \"'+ erlang + '\",\"type\" : \"make\",\"values\" : []}');
+		};
+		ws.onmessage = function (evt) {
+			if (evt.data) {
+				var str = evt.data;
+				eval(str);
+			}
+		};
+		ws.onclose = function() {
+			// websocket was closed
+		};
+	} else {
+		// browser does not support websockets
+	}
+}
+</script>
+<title>switch_1</title>
+</head>
+<body onload="ready()">
+<svg onclick="powerswitch()" id="svg" width="428" height="428" shape-rendering="auto" xmlns="http://www.w3.org/2000/svg"
+style="position:absolute; top:0; left:0; z-index:1">
+  <defs>
+    <filter id="f1" x="0" y="0" width="200%" height="200%">
+      <feOffset result="offOut" in="SourceGraphic" dx="10" dy="10" />
+      <feColorMatrix result="matrixOut" in="offOut" type="matrix"
+      values="0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 1 0" />
+      <feGaussianBlur result="blurOut" in="matrixOut" stdDeviation="10" />
+      <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+    </filter>
+  </defs>
+<g scale(1 -1) translate(5,-420)">
+<circle cx="209.853" cy="209.077" r="153.242" stroke-width="1" fill='rgb(100,100,255)' stroke="rgb(0,0,0)" filter="url(#f1)" />
+</g>
+<g  id="svg_g" transform="rotate(0,209.853,209.077) scale(1 -1) translate(0,-420)">
+<path d="M 256.260 102.381 L 256.260 102.381 A 116.351 116.351 0 0 1 256.260 315.772
+L 256.260 315.772 A 21.634 21.634 0 0 1 228.398 292.504
+L 228.398 292.504 L 228.398 125.650 A 21.634 21.634 0 0 1 256.260 102.381
+L 256.260 102.381 z" fill="rgb(100,100,100)"  stroke="rgb(0,0,0)" />
+<path d="M 191.308 292.504 L 191.308 292.504 L 191.308 125.650 A 21.634 21.634 0 0 0 163.446 102.381
+L 163.446 102.381 A 116.351 116.351 0 0 0 163.446 315.772
+L 163.446 315.772 A 21.634 21.634 0 0 0 191.308 292.504
+L 191.308 292.504 z" fill="rgb(100,100,100)"  stroke="rgb(0,0,0)" />
+</g>
+</svg>
+<canvas  id=dxf height="428" width="428" style="position:absolute; left:0; top:0; z-index:0;">
+<script type='text/javascript'>
+colors = new Array(257);
+for(var i=0;i<257;i++) {
+	colors[i]='rgb('+i+','+i+','+i+')';
+}; colors[1] = 'red'; colors[3] = 'green';
+var canvas = document.getElementById('dxf');
+var ctx = canvas.getContext('2d');
+canvas.setAttribute('miterLimit','2.0');
+ctx.scale(1,-1);
+ctx.translate(5,"-420");
+ctx.lineWidth=1;
+ctx.fillStyle = colors[200];
+ctx.strokeStyle = colors[200];
+ctx.beginPath(); 
+ctx.lineTo(19.078,0.000);
+ctx.arc(400.629,19.078,19.078,4.712,0.000,false);
+ctx.lineTo(419.706,19.078);
+ctx.arc(400.629,399.076,19.078,6.283,1.571,false);
+ctx.lineTo(400.629,418.153);
+ctx.arc(19.078,399.076,19.078,1.571,3.142,false);
+ctx.lineTo(0.000,399.076);
+ctx.arc(19.078,19.078,19.078,3.142,4.712,false);
+ctx.lineTo(19.078,0.000);
+ctx.fill();
+ctx.fillStyle = colors[240];
+ctx.strokeStyle = colors[240];
+ctx.beginPath(); 
+ctx.arc(18.253,18.253,11.447,3.142,4.712,false);
+ctx.lineTo(18.253,6.807);
+ctx.arc(401.453,18.253,11.447,4.712,0.000,false);
+ctx.lineTo(412.899,18.253);
+ctx.arc(401.453,399.900,11.447,6.283,1.571,false);
+ctx.arc(400.637,402.303,9.080,1.481,6.062,true);
+ctx.lineTo(409.496,400.312);
+ctx.arc(401.865,17.841,7.631,0.000,4.712,true);
+ctx.lineTo(401.865,10.210);
+ctx.arc(17.435,21.244,11.041,4.749,3.416,true);
+ctx.lineTo(6.807,18.253);
+ctx.fill();
+ctx.fillStyle = colors[160];
+ctx.strokeStyle = colors[160];
+ctx.beginPath(); 
+ctx.arc(16.169,19.504,16.175,3.168,4.808,false);
+ctx.lineTo(17.712,3.403);
+ctx.arc(401.995,17.712,14.308,4.712,0.000,false);
+ctx.lineTo(416.303,17.712);
+ctx.arc(399.994,401.800,16.365,6.200,1.532,false);
+ctx.arc(400.629,399.076,19.078,1.571,6.283,true);
+ctx.lineTo(419.706,399.076);
+ctx.arc(400.629,19.078,19.078,0.000,4.712,true);
+ctx.lineTo(400.629,0.000);
+ctx.arc(19.078,19.078,19.078,4.712,3.142,true);
+ctx.lineTo(0.000,19.078);
+ctx.fill();
+ctx.fillStyle = colors[240];
+ctx.strokeStyle = colors[240];
+ctx.beginPath(); 
+ctx.lineTo(401.995,414.750);
+ctx.arc(17.712,400.442,14.308,1.571,3.142,false);
+ctx.lineTo(3.403,400.442);
+ctx.arc(17.712,17.712,14.308,3.142,4.712,false);
+ctx.arc(16.169,19.504,16.175,4.808,3.168,true);
+ctx.lineTo(0.000,19.078);
+ctx.arc(19.078,399.076,19.078,3.142,1.571,true);
+ctx.lineTo(19.078,418.153);
+ctx.arc(399.994,401.800,16.365,1.532,6.200,true);
+ctx.arc(401.995,400.442,14.308,6.283,1.571,false);
+ctx.lineTo(401.995,414.750);
+ctx.fill();
+ctx.fillStyle = colors[160];
+ctx.strokeStyle = colors[160];
+ctx.beginPath(); 
+ctx.arc(400.637,402.303,9.080,6.062,1.481,false);
+ctx.lineTo(401.453,411.347);
+ctx.arc(18.253,399.900,11.447,1.571,3.142,false);
+ctx.lineTo(6.807,399.900);
+ctx.arc(17.435,21.244,11.041,3.416,4.749,false);
+ctx.arc(17.841,17.841,7.631,4.712,3.142,true);
+ctx.lineTo(10.210,17.841);
+ctx.arc(17.841,400.312,7.631,3.142,1.571,true);
+ctx.lineTo(17.841,407.943);
+ctx.arc(401.865,400.312,7.631,1.571,6.283,true);
+ctx.lineTo(409.496,400.312);
+ctx.fill();
+</script>
+</body>
+</html>
