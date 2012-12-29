@@ -23,7 +23,7 @@ function ready(){
 		WebSocket = MozWebSocket;
 	}
 	if ('WebSocket' in window) {
-		ws = new WebSocket('ws://217.212.3.12:81');
+		ws = new WebSocket('ws://17.12.30.12:81');
 		ws.onopen = function() {
 			var erlang = document.getElementById('module').name
 			ws.send('{\"pid\" : \"'+ erlang + '\",\"type\" : \"make\",\"values\" : []}');
