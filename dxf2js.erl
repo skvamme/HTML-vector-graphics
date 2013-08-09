@@ -51,6 +51,7 @@ start(Args) ->
                 {_,B1} = split_binary(B, 22),
                 B2 = find_header(B1),
                 {X1,Y1,X2,Y2} = limits(B2),
+					 insert(Ttable,{translate,Y2-Y1}),
                 print_header(),
                 Mode:print_body({X1,Y1,X2,Y2}),
                 B3 = find_entities(B2),
