@@ -96,6 +96,19 @@ print_entity({_,"CIRCLE",Entity},_) ->
 	setColor(Pen),
 	io:format("ctx.beginPath(); ctx.arc(~.3f,~.3f,~.3f,~.3f,false); ctx.stroke();~n",[X1,Y1,Radius,2*pi()]);
 
+print_entity({_,"TEXT",Entity},_) ->
+	[{_,X1}|_] = lookup(Entity, 10),
+   [{_,Y1}|_] = lookup(Entity, 20),
+	[{_,String}|_] = lookup(Entity, 1),
+	[{_,Size}|_] = lookup(Entity, 40),
+   [{_,Pen}|_] = reverse(lookup(Entity, 62)),
+	setColor(Pen),
+	io:format("ctx.save();~n",[]),
+	io:format("ctx.scale(1,-1);~n",[]),
+	io:format("ctx.translate(0,~.3f);~n",[-1 * (2*Y1)]),
+   io:format("ctx.font = '~.3fpt Helvetica'; ctx.fillText('~s', ~.3f, ~.3f);~n",[Size,String,X1,Y1]),
+	io:format("ctx.restore();~n",[]);
+
 print_entity({_,"POLYLINE",Entity},Ttable) -> 
 	[{_,Pen}|_] = reverse(lookup(Entity, 62)), 
 	setColor(Pen),
