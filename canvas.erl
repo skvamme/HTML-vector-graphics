@@ -24,8 +24,8 @@ print_body({X1,Y1,X2,Y2}) ->
 	io:format("var canvas = document.getElementById('dxf');~n",[]),
 	io:format("var ctx = canvas.getContext('2d');~n",[]),
 	io:format("canvas.setAttribute('miterLimit','2.0');~n",[]),
-	io:format("ctx.scale(1,-1);~n",[]),
-	io:format("ctx.translate(0,\"-~.3f\");~n",[Y2-Y1]),
+%	io:format("ctx.scale(1,-1);~n",[]),
+%	io:format("ctx.translate(0,\"-~.3f\");~n",[Y2-Y1]),
 	io:format("ctx.lineWidth=1;~n",[]).
 
 
@@ -103,11 +103,11 @@ print_entity({_,"TEXT",Entity},_) ->
 	[{_,Size}|_] = lookup(Entity, 40),
    [{_,Pen}|_] = reverse(lookup(Entity, 62)),
 	setColor(Pen),
-	io:format("ctx.save();~n",[]),
-	io:format("ctx.scale(1,-1);~n",[]),
-	io:format("ctx.translate(0,~.3f);~n",[-1 * (2*Y1)]),
-   io:format("ctx.font = '~.3fpt Helvetica'; ctx.fillText('~s', ~.3f, ~.3f);~n",[Size,String,X1,Y1]),
-	io:format("ctx.restore();~n",[]);
+%	io:format("ctx.save();~n",[]),
+%	io:format("ctx.scale(1,-1);~n",[]),
+%	io:format("ctx.translate(0,~.3f);~n",[-1 * (2*Y1)]),
+   io:format("ctx.font = '~.3fpt Helvetica'; ctx.fillText('~s', ~.3f, ~.3f);~n",[Size,String,X1,Y1]);
+%	io:format("ctx.restore();~n",[]);
 
 print_entity({_,"POLYLINE",Entity},Ttable) -> 
 	[{_,Pen}|_] = reverse(lookup(Entity, 62)), 

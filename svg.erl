@@ -68,10 +68,10 @@ print_entity({_,"TEXT",Entity},_) ->
 	[{_,String}|_] = lookup(Entity, 1),
 	[{_,Size}|_] = lookup(Entity, 40),
    [{_,Pen}|_] = reverse(lookup(Entity, 62)),
-	Translate = -1 * ((2 * Y1)),
-	io:format("<g transform='scale(1 -1) translate(0,~.3f)')>~n",[Translate]),
-	io:format("<text x='~.3f' y='~.3f' font-family='Verdana' font-size='~.3f' fill='rgb(~B,~B,~B)' >~s</text>~n",[X1,Y1,Size,Pen,Pen,Pen,String]),
-	io:format("</g>~n",[]);
+%	Translate = -1 * ((2 * Y1)),
+%	io:format("<g transform='scale(1 -1) translate(0,~.3f)')>~n",[Translate]),
+	io:format("<text x='~.3f' y='~.3f' font-family='Verdana' font-size='~.3f' fill='rgb(~B,~B,~B)' >~s</text>~n",[X1,Y1,Size,Pen,Pen,Pen,String]);
+%	io:format("</g>~n",[]);
 	
 print_entity({_,"LWPOLYLINE",Entity},_) ->
 	[{_,Pen}|_] = reverse(lookup(Entity, 62)), 
