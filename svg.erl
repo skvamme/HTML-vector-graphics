@@ -16,7 +16,8 @@ print_body({X1,Y1,X2,Y2}) ->
 %	io:format("<svg  id=\"svg\" viewBox=\"0 0 220 146\" shape-rendering=\"auto\" xmlns=\"http://www.w3.org/2000/svg\">~n",[]),
 	io:format("<svg  id=\"svg\" width=\"~.3f\" height=\"~.3f\" shape-rendering=\"auto\" xmlns=\"http://www.w3.org/2000/svg\"~n",[X2-X1,Y2-Y1]),
 	io:format("style=\"position:absolute; top:0; left:0; z-index:1\">~n",[]),
-	io:format("<g  transform=\"scale(1 -1) translate(0,-~.3f)\">~n",[Y2-Y1]),
+%	io:format("<g  transform=\"scale(1 -1) translate(0,-~.3f)\">~n",[Y2-Y1]),
+	io:format("<g>~n"),
 	io:format("<title>Layer 1</title>~n",[]).
 
 
@@ -127,7 +128,7 @@ doLWPoly(Pen,Closed,FirstVertex,G42list,G10list,G20list) ->
 	[{20,Y1}|G20tail] = G20list,
 	case FirstVertex of
 		1 -> 	io:format("<path d=\"M ~.3f ~.3f ",[X1,Y1]),
-				doLWPoly(Pen,Closed,0,G42list,G10list,G20list);
+				doLWPoly(Pen,Closed,0,G42tail,G10tail,G20tail);
 		_ ->  drawSegment(G10list,G20list,G42list),
 				doLWPoly(Pen,Closed,0,G42tail,G10tail,G20tail)
 	end.
