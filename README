@@ -7,6 +7,8 @@ The DXF file can be created in QCAD, AUTOCAD and other CAD systems. Note that a 
 3. Save as DXF
 4. Undo Move and Miror
 
+Make sure you have compiled the 3 erl-files, the Erlang command is erlc *.erl
+
 In a terminal, type ./dxf2js.sh myfile 0
 
 to create a file myfile.html with a canvas representation of the drawing.
@@ -18,6 +20,6 @@ The parameters to dxf2js.sh is a dxffilename without extension, and a layername
 
 If the layer name is svg the output format will be svg, all other layers will be in canvas format. This makes it easy to create a combined svg/canvas graphics.
  
- You need to download Erlang http://www.erlang.org to run this program.
+You need to download and install Erlang http://www.erlang.org to run this program. After installation, run erlc *.erl in HTML-vector-graphics directory.
  
  
