@@ -41,8 +41,11 @@ start(Args) ->
             error -> io:format("//Cannot read file: ~p~n",[DXF]);
             ascii ->
                 {ok, F} = file:open(DXF, read),
+                find_header_ascii(F),
+				{{X1,[]},{Y1,[]},{X2,[]},{Y2,[]}} = limits_ascii(F),
+				%io:format("Limits: ~p~n",[{X1,Y1,X2,Y2}]),
                 print_header(),
-                Mode:print_body(),
+                Mode:print_body({X1,Y1,X2,Y2}),
                 find_entities_ascii(F),
                 io:get_line(F, ''), % get rid of "  0"
                 entities_ascii(F,Etable,string:to_upper(Layer),trim(io:get_line(F, '')));
@@ -94,7 +97,35 @@ fea(_F,"ENTITIES") -> ok;
 fea(_F,eof) -> io:format("Didn't find entities section~n",[]),erlang:halt();
 fea(F,_) -> fea(F,trim(io:get_line(F, ''))).
 	
+%****************************************************************************************
+% Function find_header_ascii(F1), 
+%****************************************************************************************
+find_header_ascii(F) -> fha(F,"").
 
+fha(_F,"HEADER") -> ok;
+fha(_F,eof) -> io:format("Didn't find header section~n",[]),erlang:halt();
+fha(F,_) -> fha(F,trim(io:get_line(F, ''))).
+
+
+%****************************************************************************************
+% Function limits_ascii(F)
+%****************************************************************************************
+limits_ascii(F) -> limits_ascii(F,{undefined,undefined,undefined,undefined}).
+
+limits_ascii(_F,{X1,Y1,X2,Y2}) when X1 /= undefined andalso X2 /= undefined -> {X1,Y1,X2,Y2};
+limits_ascii(F,{X1,Y1,X2,Y2}) ->
+	Params = case trim(io:get_line(F, '')) of
+		"$EXTMIN" -> trim(io:get_line(F, '')),X = string:to_float(trim(io:get_line(F, ''))),
+			trim(io:get_line(F, '')),Y = string:to_float(trim(io:get_line(F, ''))),
+			{X,Y,X2,Y2};
+		"$EXTMAX" -> trim(io:get_line(F, '')),X = string:to_float(trim(io:get_line(F, ''))),
+			trim(io:get_line(F, '')),Y = string:to_float(trim(io:get_line(F, ''))),
+			{X1,Y1,X,Y};
+		_ -> {X1,Y1,X2,Y2}
+	end,
+	limits_ascii(F,Params).
+	
+	
 %****************************************************************************************
 % Function entities_ascii(Etable,F1)
 %****************************************************************************************

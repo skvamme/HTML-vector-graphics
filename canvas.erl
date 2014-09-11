@@ -11,7 +11,7 @@
 
 
 %****************************************************************************
-% Print the header section in the html file
+% Print the <canvas>
 %****************************************************************************
 print_body({X1,Y1,X2,Y2}) ->
 	io:format("<canvas id=dxf height=\"~.3f\" width=\"~.3f\" style=\"position:absolute; left:0; top:0; z-index:0;\">~n",[Y2-Y1,X2-X1]),
