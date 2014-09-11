@@ -109,6 +109,7 @@ fha(F,_) -> fha(F,trim(io:get_line(F, ''))).
 
 %****************************************************************************************
 % Function limits_ascii(F)
+% $PLIMMAX and $PLIMMIN are for q-cad, set with paper size
 %****************************************************************************************
 limits_ascii(F) -> limits_ascii(F,{undefined,undefined,undefined,undefined}).
 
@@ -118,7 +119,13 @@ limits_ascii(F,{X1,Y1,X2,Y2}) ->
 		"$EXTMIN" -> trim(io:get_line(F, '')),X = string:to_float(trim(io:get_line(F, ''))),
 			trim(io:get_line(F, '')),Y = string:to_float(trim(io:get_line(F, ''))),
 			{X,Y,X2,Y2};
+		"$PLIMMIN" -> trim(io:get_line(F, '')),X = string:to_float(trim(io:get_line(F, ''))),
+			trim(io:get_line(F, '')),Y = string:to_float(trim(io:get_line(F, ''))),
+			{X,Y,X2,Y2};
 		"$EXTMAX" -> trim(io:get_line(F, '')),X = string:to_float(trim(io:get_line(F, ''))),
+			trim(io:get_line(F, '')),Y = string:to_float(trim(io:get_line(F, ''))),
+			{X1,Y1,X,Y};
+		"$PLIMMAX" -> trim(io:get_line(F, '')),X = string:to_float(trim(io:get_line(F, ''))),
 			trim(io:get_line(F, '')),Y = string:to_float(trim(io:get_line(F, ''))),
 			{X1,Y1,X,Y};
 		_ -> {X1,Y1,X2,Y2}

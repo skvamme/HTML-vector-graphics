@@ -10,10 +10,14 @@ The DXF file can be created in QCAD, AUTOCAD and other CAD systems. Note that a 
 Make sure you have compiled the 3 erl-files, the Erlang command is erlc *.erl
 
 In a terminal, type ./dxf2js.sh myfile 0
+to create a file myfile.html with a canvas representation of the drawing at layer 0.
 
-to create a file myfile.html with a canvas representation of the drawing.
+In a terminal, type ./dxf2js.sh myfile svg
+to create a file myfile.html with a svg representation of the drawing at layer svg.
 
 If you are on a Windows system you have to create a bat-file or run dxf2js module from the erlang console.
+
+If you are using QCAD, set the paper size in Drawing Preferences.
  
 
 The parameters to dxf2js.sh is a dxffilename without extension, and a layername
