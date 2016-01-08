@@ -128,6 +128,7 @@ limits_ascii(F,{X1,Y1,X2,Y2}) ->
 		"$PLIMMAX" -> trim(io:get_line(F, '')),X = string:to_float(trim(io:get_line(F, ''))),
 			trim(io:get_line(F, '')),Y = string:to_float(trim(io:get_line(F, ''))),
 			{X1,Y1,X,Y};
+		eof -> io:format("Didn't find drawing limits~n",[]),erlang:halt();
 		_ -> {X1,Y1,X2,Y2}
 	end,
 	limits_ascii(F,Params).
