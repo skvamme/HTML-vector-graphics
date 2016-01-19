@@ -1,9 +1,19 @@
+%% Copyright (C) 2012 by S Kvamme
+%% All rights reserved.
+%% The copyright holder hereby grants the rights of usage, distribution
+%% and modification of this software to everyone and for any purpose, as
+%% long as this license and the copyright notice above are preserved and
+%% not modified. There is no warranty for this software.
+
+
 -module(canvas).
 -author(skvamme).
 -compile(export_all).
 -import(lists, [reverse/1]).
 -import(ets,[lookup/2,insert/2]).
 -import(math,[pi/0,pow/2,sqrt/1,atan2/2]).
+
+
 
 %% ToDo: 
 %% Done:

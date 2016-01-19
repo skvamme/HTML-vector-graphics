@@ -1,3 +1,11 @@
+%% Copyright (C) 2012 by S Kvamme
+%% All rights reserved.
+%% The copyright holder hereby grants the rights of usage, distribution
+%% and modification of this software to everyone and for any purpose, as
+%% long as this license and the copyright notice above are preserved and
+%% not modified. There is no warranty for this software.
+
+
 -module(svg).
 -author(skvamme).
 -compile(export_all).
