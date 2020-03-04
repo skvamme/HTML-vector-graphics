@@ -2,7 +2,7 @@ This Erlang Program converts a DXF (binary or ASCII) to an HTML file. View it in
 
 The DXF file can be created in QCAD (free) http://www.ribbonsoft.com/en/ , AUTOCAD and other CAD systems. Note that a closed pline will be filled in the HTML file. Entities with higher thickness will be on top in the HTML file.
 
-1. Mirror your drawing in the CAD-app down over the X-axis (X=0)
+1. Mirror your drawing in the CAD-app down over the X-axis (Y=0)
 2. Move the drawing up to it's previous position (up above the X-axis)
 3. Save as DXF
 4. Undo Move and Miror
