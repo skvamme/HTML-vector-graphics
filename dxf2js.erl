@@ -33,7 +33,7 @@
 %% 120124    If layer name is svg the output will be svg else output is <canvas>
 
 %****************************************************************************
-% Read dxf file and otput corresponding javascript source for <CANVAS> or SVG graphics
+% Read dxf file and output corresponding javascript source for <CANVAS> or SVG graphics
 %****************************************************************************
 start(Args) ->
     DXF = hd(Args),
